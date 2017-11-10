@@ -2,7 +2,8 @@ package math
 
 func fibonacci(n int, ch chan<- uint) {
 	var current, next uint = 0, 1
-	for i := 0; i < n; i++ { <- current
+	for i := 0; i < n; i++ {
+		ch <- current
 		current, next = next, current+next
 	}
 }
