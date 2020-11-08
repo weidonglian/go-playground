@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="35678392-39d9-4eff-89e0-e50a60137dfa" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/channel/channel_test.go" afterDir="false" />
+    <list default="true" id="35678392-39d9-4eff-89e0-e50a60137dfa" name="Default" comment="test: channel reference vs value">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,11 +25,8 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="260" />
-    <option name="y" value="80" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
+  <component name="GoVcsConfiguration">
+    <option name="GO_FMT" value="false" />
   </component>
   <component name="ProjectId" id="1k0AdnGLJgVKASJlMNkU0uPE1gH" />
   <component name="ProjectLevelVcsManager">
@@ -42,7 +38,6 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultGoTemplateProperty" value="Go File" />
-    <property name="GO_FMT" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SearchEverywhereHistoryKey" value="format &#9;ACTION&#9;ReformatCode" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -98,9 +93,14 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="reorganize the workspace and project directory structure and adding unit test." />
     <MESSAGE value="fix the mistake change of code in goland." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix the mistake change of code in goland." />
+    <MESSAGE value="test: channel reference vs value" />
+    <option name="LAST_COMMIT_MESSAGE" value="test: channel reference vs value" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="897" y="272" key="CommitChangelistDialog2" timestamp="1604829275056">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="897" y="272" key="CommitChangelistDialog2/0.0.2560.1400@0.0.2560.1400" timestamp="1604829275055" />
     <state width="2517" height="400" key="GridCell.Tab.0.bottom" timestamp="1604829241762">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -117,6 +117,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="2517" height="400" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1604829241762" />
+    <state x="873" y="434" key="Vcs.Push.Dialog.v2" timestamp="1604864858030">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="873" y="434" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1604864858030" />
   </component>
   <component name="masterDetails">
     <states>
