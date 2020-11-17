@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="35678392-39d9-4eff-89e0-e50a60137dfa" name="Default" comment="test: channel reference vs value">
+    <list default="true" id="35678392-39d9-4eff-89e0-e50a60137dfa" name="Default" comment="idea xml file">
+      <change afterPath="$PROJECT_DIR$/colly/reddit.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,6 +26,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+  </component>
   <component name="GoVcsConfiguration">
     <option name="GO_FMT" value="false" />
   </component>
@@ -46,6 +50,7 @@
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
+    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.smartKeys" />
   </component>
@@ -58,7 +63,16 @@
       <recent name="F:\develop\gopath\src\github.com\weidonglian\go-playground\tree" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.channel_test.go">
+  <component name="RunManager" selected="Go Build.go build reddit.go">
+    <configuration name="go build reddit.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="go-playground" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/colly/reddit.go" />
+      <package value="github.com/weidonglian/go-playground" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <configuration name="channel_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="go-playground" />
       <working_directory value="$PROJECT_DIR$/channel" />
@@ -81,6 +95,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build reddit.go" />
         <item itemvalue="Go Test.channel_test.go" />
         <item itemvalue="Go Test.math_test.go" />
       </list>
@@ -94,29 +109,37 @@
     <MESSAGE value="reorganize the workspace and project directory structure and adding unit test." />
     <MESSAGE value="fix the mistake change of code in goland." />
     <MESSAGE value="test: channel reference vs value" />
-    <option name="LAST_COMMIT_MESSAGE" value="test: channel reference vs value" />
+    <MESSAGE value="idea xml file" />
+    <option name="LAST_COMMIT_MESSAGE" value="idea xml file" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
   </component>
   <component name="WindowStateProjectService">
-    <state x="897" y="272" key="CommitChangelistDialog2" timestamp="1604829275056">
+    <state x="897" y="272" key="CommitChangelistDialog2" timestamp="1604864898817">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="897" y="272" key="CommitChangelistDialog2/0.0.2560.1400@0.0.2560.1400" timestamp="1604829275055" />
-    <state width="2517" height="400" key="GridCell.Tab.0.bottom" timestamp="1604829241762">
+    <state x="897" y="272" key="CommitChangelistDialog2/0.0.2560.1400@0.0.2560.1400" timestamp="1604864898817" />
+    <state x="1061" y="456" key="FileChooserDialogImpl" timestamp="1605011946105">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="400" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1604829241762" />
-    <state width="2517" height="400" key="GridCell.Tab.0.center" timestamp="1604829241762">
+    <state x="1061" y="456" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1605011946105" />
+    <state width="2517" height="400" key="GridCell.Tab.0.bottom" timestamp="1605629298103">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="400" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1604829241762" />
-    <state width="2517" height="400" key="GridCell.Tab.0.left" timestamp="1604829241762">
+    <state width="2517" height="400" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1605629298103" />
+    <state width="2517" height="400" key="GridCell.Tab.0.center" timestamp="1605629298103">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="400" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1604829241762" />
-    <state width="2517" height="400" key="GridCell.Tab.0.right" timestamp="1604829241762">
+    <state width="2517" height="400" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1605629298103" />
+    <state width="2517" height="400" key="GridCell.Tab.0.left" timestamp="1605629298103">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="400" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1604829241762" />
+    <state width="2517" height="400" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1605629298103" />
+    <state width="2517" height="400" key="GridCell.Tab.0.right" timestamp="1605629298103">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="400" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1605629298103" />
     <state x="873" y="434" key="Vcs.Push.Dialog.v2" timestamp="1604864858030">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
