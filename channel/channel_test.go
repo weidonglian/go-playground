@@ -8,8 +8,6 @@ import (
 
 import "github.com/stretchr/testify/assert"
 
-
-
 type StructID struct {
 	id int
 }

@@ -1,4 +1,3 @@
-// Exercise: Equivalent Binary Trees see https://tour.golang.org/concurrency/8
 package tree
 
 import (

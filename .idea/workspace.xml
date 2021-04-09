@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="35678392-39d9-4eff-89e0-e50a60137dfa" name="Default" comment="idea xml file">
-      <change afterPath="$PROJECT_DIR$/colly/reddit.go" afterDir="false" />
+    <list default="true" id="35678392-39d9-4eff-89e0-e50a60137dfa" name="Default" comment="add new context examples">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/channel/channel_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/channel/channel_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/colly/reddit.go" beforeDir="false" afterPath="$PROJECT_DIR$/colly/reddit.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/context/cancel.go" beforeDir="false" afterPath="$PROJECT_DIR$/context/cancel.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,15 +27,16 @@
       <find>fib</find>
     </findStrings>
   </component>
-  <component name="GOROOT" path="C:\Go" />
+  <component name="GOROOT" url="file:///usr/lib/go-1.16" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="false" />
   </component>
-  <component name="GoVcsConfiguration">
-    <option name="GO_FMT" value="false" />
+  <component name="KubernetesApiPersistence">
+    <option name="context" value="minikube" />
+    <option name="namespace" value="default" />
   </component>
   <component name="ProjectId" id="1k0AdnGLJgVKASJlMNkU0uPE1gH" />
   <component name="ProjectLevelVcsManager">
@@ -41,8 +47,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SearchEverywhereHistoryKey" value="format &#9;ACTION&#9;ReformatCode" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
@@ -68,36 +76,36 @@
       <module name="go-playground" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/colly/reddit.go" />
       <package value="github.com/weidonglian/go-playground" />
       <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/colly/reddit.go" />
       <method v="2" />
     </configuration>
     <configuration name="channel_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="go-playground" />
       <working_directory value="$PROJECT_DIR$/channel" />
-      <framework value="gotest" />
       <kind value="FILE" />
       <package value="github.com/weidonglian/go-playground" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$/channel/channel_test.go" />
+      <framework value="gotest" />
       <method v="2" />
     </configuration>
     <configuration name="math_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="go-playground" />
       <working_directory value="$PROJECT_DIR$/math" />
-      <framework value="gotest" />
       <kind value="FILE" />
       <package value="github.com/weidonglian/go-playground" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$/math/math_test.go" />
+      <framework value="gotest" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build reddit.go" />
-        <item itemvalue="Go Test.channel_test.go" />
         <item itemvalue="Go Test.math_test.go" />
+        <item itemvalue="Go Test.channel_test.go" />
+        <item itemvalue="Go Build.go build reddit.go" />
       </list>
     </recent_temporary>
   </component>
@@ -110,40 +118,11 @@
     <MESSAGE value="fix the mistake change of code in goland." />
     <MESSAGE value="test: channel reference vs value" />
     <MESSAGE value="idea xml file" />
-    <option name="LAST_COMMIT_MESSAGE" value="idea xml file" />
+    <MESSAGE value="add new context examples" />
+    <option name="LAST_COMMIT_MESSAGE" value="add new context examples" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="897" y="272" key="CommitChangelistDialog2" timestamp="1604864898817">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="897" y="272" key="CommitChangelistDialog2/0.0.2560.1400@0.0.2560.1400" timestamp="1604864898817" />
-    <state x="1061" y="456" key="FileChooserDialogImpl" timestamp="1605011946105">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1061" y="456" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1605011946105" />
-    <state width="2517" height="400" key="GridCell.Tab.0.bottom" timestamp="1605629298103">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="400" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1605629298103" />
-    <state width="2517" height="400" key="GridCell.Tab.0.center" timestamp="1605629298103">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="400" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1605629298103" />
-    <state width="2517" height="400" key="GridCell.Tab.0.left" timestamp="1605629298103">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="400" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1605629298103" />
-    <state width="2517" height="400" key="GridCell.Tab.0.right" timestamp="1605629298103">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="400" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1605629298103" />
-    <state x="873" y="434" key="Vcs.Push.Dialog.v2" timestamp="1604864858030">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="873" y="434" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1604864858030" />
   </component>
   <component name="masterDetails">
     <states>
