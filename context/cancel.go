@@ -8,7 +8,6 @@ import (
 )
 
 var sendError = false
-var wg sync.WaitGroup
 
 /**
  * Branch A
@@ -120,6 +119,7 @@ func B21(ctx context.Context) error {
 }
 
 func main() {
+	var wg sync.WaitGroup
 	wg.Add(2)
 
 	ctx, cancelFunc := context.WithCancel(context.Background())
