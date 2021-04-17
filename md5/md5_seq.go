@@ -1,4 +1,4 @@
-package impl
+package md5
 
 import (
 	"context"

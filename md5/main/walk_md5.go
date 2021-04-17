@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/weidonglian/go-playground/md5/impl"
+	"github.com/weidonglian/go-playground/md5"
 	"os"
 	"os/signal"
 	"sort"
@@ -29,12 +29,12 @@ func main() {
 		cancelFunc() // tell other context we are canceling please exit as soon as possible
 	}()
 
-	var m map[string]impl.Md5Sum
+	var m map[string]md5.Md5Sum
 	var err error
 	if os.Args[1] == "par" {
-		m, err = impl.Md5AllPar(ctx, os.Args[2])
+		m, err = md5.Md5AllPar(ctx, os.Args[2])
 	} else {
-		m, err = impl.Md5AllSeq(ctx, os.Args[2])
+		m, err = md5.Md5AllSeq(ctx, os.Args[2])
 	}
 
 	if err != nil {
