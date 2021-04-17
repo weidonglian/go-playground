@@ -47,6 +47,21 @@ func fibonacci(c, quit chan struct{}) {
 }
 ```
 
+Which side is responsible or takes the ownership of the channel? 
+Conceptually, it should be the `sender` side of the channel that should close it if needed. 
+A conventional pattern is that 
+- we initiate a new channel
+- pass it to the `sender` (i.e. producer in another goroutine), when all values have been processed (i.e. waitgroup), close it. 
+- pass it to the `receiver` (i.e. consumer in another goroutine), receive values from channel and also check if channel 
+  has been closed.  
+It is the sender side that should close the channel when all values have been processed.
+
+## Synchronization
+
+### sync.pool
+
+sync.pool is used to reuse a temporary object via pool. We can put and get a random object from the pool.
+
 ## Misc
 
 ### `struct{}` vs `interface{}`
