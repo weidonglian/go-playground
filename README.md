@@ -1,5 +1,11 @@
 # go-playground
 
+This is my generic `golang` learning notes.
+
+There is also another learning note about the back-end stack: `microservce`,
+`messaging queu`, `http`, `REST` and `GraphQL` API, `authentication`, `deployment`.
+see this [repo](https://github.com/weidonglian/notes-app) for more details.
+
 ## Channels
 
 channel is normally used to communicate between go routines. There are two types of channels: `buffered`
