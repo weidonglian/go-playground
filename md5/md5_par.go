@@ -12,13 +12,17 @@ import (
 	"time"
 )
 
-func fileWalker(ctx context.Context, root string) (<-chan string, <-chan error) {
-	chPaths := make(chan string, 20)
-	chError := make(chan error, 1)
+func stageSourceFileWalker(ctx context.Context, root string) (<-chan string, <-chan error, error) {
+	if root == "" {
+		return nil, nil, errors.New("empty root is not allowed")
+	}
+
+	pathc := make(chan string)
+	errc := make(chan error, 1)
 	go func() {
-		defer close(chPaths)
-		defer close(chError)
-		chError <- filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
+		defer close(pathc)
+		defer close(errc)
+		errc <- filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
 			if err != nil {
 				return err
 			}
@@ -33,7 +37,7 @@ func fileWalker(ctx context.Context, root string) (<-chan string, <-chan error) 
 			}
 
 			select {
-			case chPaths <- path:
+			case pathc <- path:
 			case <-ctx.Done():
 				return errors.New("walk canceled")
 			}
@@ -41,57 +45,119 @@ func fileWalker(ctx context.Context, root string) (<-chan string, <-chan error) 
 			return nil
 		})
 	}()
-	return chPaths, chError
+	return pathc, errc, nil
 }
 
-func fileDigester(ctx context.Context, paths <-chan string, results chan<- Md5Result) {
-	for path := range paths {
-		fmt.Println("start reading file ", path)
-		start := time.Now()
-		data, err := ioutil.ReadFile(path)
-		fmt.Println("finish reading file takes ", path, ", ", time.Since(start))
-		select {
-		case <-ctx.Done():
-			return
-		case results <- Md5Result{
-			path: path,
-			sum:  md5.Sum(data),
-			err:  err,
-		}:
-		}
-		fmt.Println("checksum takes ", path, ", ", time.Since(start))
+func stageFTFileDigest(ctx context.Context, pathc <-chan string) (<-chan Md5Result, <-chan error, error) {
+	const kNumDigesters = 20
+	resultc := make(chan Md5Result)
+	errc := make(chan error, 1)
+	var wg sync.WaitGroup
+	wg.Add(kNumDigesters)
+	for i := 0; i < kNumDigesters; i++ {
+		go func() {
+			defer wg.Done()
+			for path := range pathc {
+				fmt.Println("start reading file ", path)
+				start := time.Now()
+				data, err := ioutil.ReadFile(path)
+				fmt.Println("finish reading file takes ", path, ", ", time.Since(start))
+				select {
+				case resultc <- Md5Result{
+					path: path,
+					sum:  md5.Sum(data),
+					err:  err,
+				}:
+				case <-ctx.Done():
+					return
+				}
+				fmt.Println("checksum takes ", path, ", ", time.Since(start))
+			}
+		}()
 	}
+
+	go func() {
+		defer close(resultc)
+		defer close(errc)
+		wg.Wait()
+	}()
+
+	return resultc, errc, nil
+}
+
+func stageSink(ctx context.Context, resultc <-chan Md5Result) (map[string]Md5Sum, <-chan error, error) {
+	errc := make(chan error, 1)
+	m := make(map[string]Md5Sum)
+	go func() {
+		defer close(errc)
+		for result := range resultc {
+			if result.err != nil {
+				errc <- result.err
+				return
+			}
+			m[result.path] = result.sum
+		}
+	}()
+	return m, errc, nil
+}
+
+func WaitForErrors(errcs ...<-chan error) error {
+	errc := MergeErrors(errcs...)
+	for err := range errc {
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func MergeErrors(errcs ...<-chan error) <-chan error {
+	errc := make(chan error, len(errcs))
+
+	var wg sync.WaitGroup
+	output := func(ec <-chan error) {
+		defer wg.Done()
+		for e := range ec {
+			errc <- e
+		}
+	}
+
+	wg.Add(len(errcs))
+	for _, c := range errcs {
+		go output(c)
+	}
+
+	go func() {
+		defer close(errc)
+		wg.Wait()
+	}()
+
+	return errc
 }
 
 func Md5AllPar(ctx context.Context, root string) (map[string]Md5Sum, error) {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
-	chPaths, chError := fileWalker(ctx, root)
-
-	const numDigesters = 20
-	chResults := make(chan Md5Result)
-	var wg sync.WaitGroup
-	wg.Add(numDigesters)
-	for i := 0; i < numDigesters; i++ {
-		go func() {
-			fileDigester(ctx, chPaths, chResults)
-			wg.Done()
-		}()
+	var errcList []<-chan error
+	pathc, errc, err := stageSourceFileWalker(ctx, root)
+	if err != nil {
+		return nil, err
 	}
+	errcList = append(errcList, errc)
 
-	go func() {
-		wg.Wait()
-		close(chResults)
-	}()
-
-	m := make(map[string]Md5Sum)
-	for result := range chResults {
-		if result.err != nil {
-			return nil, result.err
-		}
-		m[result.path] = result.sum
+	resultc, errc, err := stageFTFileDigest(ctx, pathc)
+	if err != nil {
+		return nil, err
 	}
-	if err := <-chError; err != nil {
+	errcList = append(errcList, errc)
+
+	m, errc, err := stageSink(ctx, resultc)
+	if err != nil {
+		return nil, err
+	}
+	errcList = append(errcList, errc)
+
+	if err := WaitForErrors(errcList...); err != nil {
 		return nil, err
 	}
 	return m, nil
