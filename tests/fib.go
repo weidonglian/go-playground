@@ -1,4 +1,4 @@
-package fib
+package tests
 
 func fibonacci(n int, ch chan<- uint) {
 	var current, next uint = 0, 1

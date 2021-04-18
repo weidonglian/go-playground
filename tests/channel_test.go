@@ -1,12 +1,12 @@
-package channel
+package tests
 
 import (
 	"fmt"
 	"sync"
 	"testing"
-)
 
-import "github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"
+)
 
 type StructID struct {
 	id int

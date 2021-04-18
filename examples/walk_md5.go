@@ -1,16 +1,106 @@
-package md5
+package main
 
 import (
 	"context"
-	"crypto/md5"
 	"errors"
 	"fmt"
 	"io/fs"
 	"io/ioutil"
+	"os"
+	"os/signal"
 	"path/filepath"
+	"sort"
 	"sync"
+	"syscall"
 	"time"
 )
+
+func main() {
+	if len(os.Args) < 3 {
+		fmt.Println("cmd argument should be 'seq <path> or par <path>'")
+		return
+	}
+
+	if os.Args[1] != "seq" && os.Args[1] != "par" {
+		fmt.Println("cmd argument should be 'seq <path> or par <path>'")
+		return
+	}
+
+	chanTerm := make(chan os.Signal)
+	signal.Notify(chanTerm, syscall.SIGTERM, syscall.SIGINT)
+	ctx, cancelFunc := context.WithCancel(context.Background())
+	go func() { // add a hookup to cancel only when term or ctrl+c is triggered
+		<-chanTerm   // block here until notified with ctrl+c or killed
+		cancelFunc() // tell other context we are canceling please exit as soon as possible
+	}()
+
+	var m map[string]md5.Md5Sum
+	var err error
+	if os.Args[1] == "par" {
+		m, err = md5.Md5AllPar(ctx, os.Args[2])
+	} else {
+		m, err = md5.Md5AllSeq(ctx, os.Args[2])
+	}
+
+	if err != nil {
+		fmt.Println("Failed Md5AllSeq with err:", err)
+		return
+	}
+	paths := make([]string, 0, len(m))
+	for path := range m {
+		paths = append(paths, path)
+	}
+	sort.Strings(paths)
+
+	// for _, path := range paths {
+	// fmt.Printf("%x  %s\n", m[path], path)
+	// }
+	fmt.Println("gracefully shutdown:)")
+}
+
+type Md5Sum [md5.Size]byte
+
+type Md5Result struct {
+	path string
+	sum  Md5Sum
+	err  error
+}
+
+func Md5AllSeq(ctx context.Context, root string) (map[string]Md5Sum, error) {
+	m := make(map[string]Md5Sum)
+	err := filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
+		if ctx.Err() == context.Canceled {
+			return context.Canceled
+		}
+
+		if err != nil {
+			return err
+		}
+
+		info, err := d.Info()
+		if err != nil {
+			return err
+		}
+
+		if !info.Mode().IsRegular() {
+			return nil
+		}
+
+		data, err := ioutil.ReadFile(path)
+		if err != nil {
+			return err
+		}
+
+		m[path] = md5.Sum(data)
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return m, nil
+}
 
 func stageSourceFileWalker(ctx context.Context, root string) (<-chan string, <-chan error, error) {
 	if root == "" {
