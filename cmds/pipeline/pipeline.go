@@ -16,6 +16,7 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
+	"github.com/weidonglian/go-playground/util"
 )
 
 // minimalPipelineStage shows the elements that every pipeline stage should have.
@@ -190,7 +191,7 @@ func runSimplePipeline(base int, lines []string) error {
 
 	fmt.Println("Pipeline started. Waiting for pipeline to complete.")
 
-	return WaitForPipeline(errcList...)
+	return util.WaitForPipeline(errcList...)
 }
 
 func runComplexPipeline(base int, lines []string) error {
@@ -245,7 +246,7 @@ func runComplexPipeline(base int, lines []string) error {
 
 	fmt.Println("Pipeline started. Waiting for pipeline to complete.")
 
-	return WaitForPipeline(errcList...)
+	return util.WaitForPipeline(errcList...)
 }
 
 func randomNumberSource(ctx context.Context, seed int64) (<-chan string, <-chan error, error) {
@@ -308,7 +309,7 @@ func runPipelineWithTimeout() error {
 		cancelFunc()
 	}()
 
-	return WaitForPipeline(errcList...)
+	return util.WaitForPipeline(errcList...)
 }
 
 func main() {

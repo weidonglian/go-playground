@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"crypto/md5"
 	"errors"
 	"fmt"
 	"io/fs"
@@ -13,6 +14,8 @@ import (
 	"sync"
 	"syscall"
 	"time"
+
+	"github.com/weidonglian/go-playground/util"
 )
 
 func main() {
@@ -34,12 +37,12 @@ func main() {
 		cancelFunc() // tell other context we are canceling please exit as soon as possible
 	}()
 
-	var m map[string]md5.Md5Sum
+	var m map[string]Md5Sum
 	var err error
 	if os.Args[1] == "par" {
-		m, err = md5.Md5AllPar(ctx, os.Args[2])
+		m, err = Md5AllPar(ctx, os.Args[2])
 	} else {
-		m, err = md5.Md5AllSeq(ctx, os.Args[2])
+		m, err = Md5AllSeq(ctx, os.Args[2])
 	}
 
 	if err != nil {
@@ -191,40 +194,6 @@ func stageSink(ctx context.Context, resultc <-chan Md5Result) (map[string]Md5Sum
 	return m, errc, nil
 }
 
-func WaitForErrors(errcs ...<-chan error) error {
-	errc := MergeErrors(errcs...)
-	for err := range errc {
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func MergeErrors(errcs ...<-chan error) <-chan error {
-	errc := make(chan error, len(errcs))
-
-	var wg sync.WaitGroup
-	output := func(ec <-chan error) {
-		defer wg.Done()
-		for e := range ec {
-			errc <- e
-		}
-	}
-
-	wg.Add(len(errcs))
-	for _, c := range errcs {
-		go output(c)
-	}
-
-	go func() {
-		defer close(errc)
-		wg.Wait()
-	}()
-
-	return errc
-}
-
 func Md5AllPar(ctx context.Context, root string) (map[string]Md5Sum, error) {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
@@ -247,7 +216,7 @@ func Md5AllPar(ctx context.Context, root string) (map[string]Md5Sum, error) {
 	}
 	errcList = append(errcList, errc)
 
-	if err := WaitForErrors(errcList...); err != nil {
+	if err := util.WaitForPipeline(errcList...); err != nil {
 		return nil, err
 	}
 	return m, nil

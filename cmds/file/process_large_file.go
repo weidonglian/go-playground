@@ -11,6 +11,8 @@ import (
 	"sync"
 	"syscall"
 	"time"
+
+	"github.com/weidonglian/go-playground/util"
 )
 
 func main() {
@@ -53,43 +55,6 @@ func main() {
 	fmt.Println("Time taken - \n", time.Since(s))
 }
 
-func MergeErrors(errcs ...<-chan error) <-chan error {
-	// fan in here
-	errc := make(chan error, len(errcs))
-	var wg sync.WaitGroup
-
-	output := func(ec <-chan error) {
-		defer wg.Done()
-		for e := range ec {
-			errc <- e
-		}
-	}
-	wg.Add(len(errcs))
-	for _, ec := range errcs {
-		go output(ec)
-	}
-
-	go func() {
-		defer close(errc)
-		wg.Wait()
-	}()
-	return errc
-}
-
-func WaitForErrors(errcs ...<-chan error) error {
-	if len(errcs) == 0 {
-		return nil
-	}
-
-	// fan-in all errcs into one channel
-	for err := range MergeErrors(errcs...) {
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
 const kChunkSize = 1024 * 1024
 const kNumParallel = 32
 
@@ -122,7 +87,7 @@ func runProcessFilePipeline(ctx context.Context, f io.Reader) error {
 		return nil
 	}
 	errcList = append(errcList, errc)
-	if err := WaitForErrors(errcList...); err != nil {
+	if err := util.WaitForPipeline(errcList...); err != nil {
 		return err
 	}
 	// Now
