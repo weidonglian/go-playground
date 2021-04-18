@@ -3,11 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/weidonglian/go-playground/md5"
 	"os"
 	"os/signal"
 	"sort"
 	"syscall"
+
+	"github.com/weidonglian/go-playground/examples/md5"
 )
 
 func main() {
