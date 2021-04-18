@@ -1,6 +1,6 @@
 # go-playground
 
-This is my generic `golang` learning note.
+This is my `golang` learning note.
 
 There is also another learning note about the back-end stack: `microservce`,
 `messaging queu`, `http`, `REST` and `GraphQL` API, `authentication`, `deployment`.
