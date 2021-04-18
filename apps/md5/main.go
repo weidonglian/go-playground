@@ -8,7 +8,7 @@ import (
 	"sort"
 	"syscall"
 
-	"github.com/weidonglian/go-playground/examples/md5"
+	"github.com/weidonglian/go-playground/apps/md5/md5"
 )
 
 func main() {
