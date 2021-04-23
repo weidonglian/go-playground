@@ -13,6 +13,9 @@ github.com/antchfx/xmlquery
 github.com/antchfx/xpath
 # github.com/davecgh/go-spew v1.1.0
 github.com/davecgh/go-spew/spew
+# github.com/gammazero/deque v0.0.0-20201010052221-3932da5530cc
+## explicit
+github.com/gammazero/deque
 # github.com/gobwas/glob v0.2.3
 ## explicit
 github.com/gobwas/glob
