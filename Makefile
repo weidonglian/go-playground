@@ -1,5 +1,5 @@
 .PHONY: all
-all: start
+all:
 
 # Tools
 sync-vendor:

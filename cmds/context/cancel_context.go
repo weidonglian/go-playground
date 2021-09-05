@@ -9,9 +9,7 @@ import (
 
 var sendError = false
 
-/**
- * Branch A
- */
+// A1 /**
 func A1(ctx context.Context) error {
 	if context.Canceled == ctx.Err() {
 		println(`    -> A1 - cancelled`)
@@ -75,9 +73,7 @@ func A12(ctx context.Context) error {
 	return nil
 }
 
-/**
- * Branch B
- */
+// B1 /**
 func B1(ctx context.Context) error {
 	if context.Canceled == ctx.Err() {
 		println(`    -> B1 cancelled`)

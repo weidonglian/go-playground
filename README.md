@@ -203,7 +203,7 @@ We could check the state of context in two ways:
 
 Note the `context` is derivable, when the parent context is canceled, all the derived contexts will be canceled as well.
 
-How to gracefully shutdown an app using context?
+How to gracefully shut down an app using context?
 
 ```go
 func main() {
@@ -229,7 +229,7 @@ handler, `context.WithValue` is intensively used to pass information between dif
 ## Buffer, Bytes, IoBuffer and FileHandling
 
 There are tons of APIs to handle a small file. The challenge is to handle the huge file in a CPU efficient and memory
-optimized way, e.g. a file around 100GB or 1TB size.
+optimized way, e.g. a file around 100 GB or 1 TB size.
 
 Possible considerations:
 

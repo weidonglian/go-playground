@@ -58,7 +58,7 @@ func main() {
 const kChunkSize = 1024 * 1024
 const kNumParallel = 32
 
-// This pipeline will count the number of lines and it is easy to extend to parse the information line by line.
+// This pipeline will count the number of lines, and it is easy to extend to parse the information line by line.
 // It reads trunks of data and then try to continue read to next line's boundary, then chunks will devide the whole
 // file across the line boundary.
 func runProcessFilePipeline(ctx context.Context, f io.Reader) error {

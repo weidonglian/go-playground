@@ -1,5 +1,5 @@
 //
-// Companion code to https://medium.com/statuscode/pipeline-patterns-in-go-a37bb3a7e61d
+// Companion codes to https://medium.com/statuscode/pipeline-patterns-in-go-a37bb3a7e61d
 //
 // To run:
 //   go get github.com/pkg/errors
