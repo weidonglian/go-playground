@@ -13,3 +13,7 @@ gen-large-file:
 test:
 	@echo Running test
 	@go test ./...
+
+benchmark:
+	@echo Running benchmark
+	@go test -bench=. ./...
