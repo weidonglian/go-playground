@@ -34,7 +34,7 @@ func insert(t *Tree, v int) *Tree {
 
 // Walk walks the tree t sending all values
 // from the tree to the channel ch.
-func Walk(t *Tree, ch chan int) {
+func Walk(t *Tree, ch chan<- int) {
 	if t == nil {
 		return
 	}
