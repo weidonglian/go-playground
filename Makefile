@@ -8,8 +8,16 @@ sync-vendor:
 
 .PHONY: tools
 tools:
-	echo Installing tools from tools.go
-	cat tools/tools.go | grep _ | awk -F'"' '{print $$2}' | xargs -tI % go install %
+	@echo Installing tools from tools.go
+	@cat tools/tools.go | grep _ | awk -F'"' '{print $$2}' | xargs -tI % go install %
+
+.PHONY: mocks
+mocks:
+	@echo Generating mocks using 'mockery'
+	@mockery --all --keeptree --dir algorithms
+	@mockery --all --keeptree --dir cmds
+	@mockery --all --keeptree --dir tests
+	@mockery --all --keeptree --dir util
 
 gen-large-file:
 	@echo Gen large file
