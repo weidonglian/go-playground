@@ -283,24 +283,30 @@ Go into a directory of the package, i.e. tree
 
 * Run the file with `func main()`
 
-``` sh
+```sh
     go run xxxx.go
-    ```
+```
 
 * Build and check if there is any compilation error
 
-``` sh
+```sh
     go build
-    ```
+```
 
 * Install into the bin folder of the $GOPATH
 
-``` sh
+```sh
   go install
-  ```
+```
 
 * Run the unit test in each package TestXXX in xxx_test.go
 
-``` sh
-  go test
-  ```
+```sh
+  go test ./...
+```
+
+* Run the benchmark in each package BenchYYY in yyy_test.go
+
+```sh
+  go test -bench=. ./... 
+```
