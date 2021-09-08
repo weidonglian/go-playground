@@ -14,10 +14,7 @@ tools:
 .PHONY: mocks
 mocks:
 	@echo Generating mocks using 'mockery'
-	@mockery --all --keeptree --dir algorithms
-	@mockery --all --keeptree --dir cmds
-	@mockery --all --keeptree --dir tests
-	@mockery --all --keeptree --dir util
+	@mockery --name=Cache --recursive --keeptree --dir algorithms
 
 gen-large-file:
 	@echo Gen large file
