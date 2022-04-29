@@ -6,15 +6,17 @@ sync-vendor:
 	@echo Download go.mod dependencies
 	@go mod download && go mod tidy && go mod vendor
 
-.PHONY: tools
 tools:
 	@echo Installing tools from tools.go
 	@cat tools/tools.go | grep _ | awk -F'"' '{print $$2}' | xargs -tI % go install %
 
-.PHONY: mocks
-mocks:
-	@echo Generating mocks using 'mockery'
-	@mockery --name=Cache --recursive --keeptree --dir algorithms
+gen-mocks:
+	@echo Generating mocks using 'gomockhandler'
+	@gomockhandler -config=./gomockhandler.json mockgen
+
+check-mocks:
+	@echo Checking mocks using 'gomockhandler'
+	@gomockhandler -config=./gomockhandler.json check
 
 gen-large-file:
 	@echo Gen large file

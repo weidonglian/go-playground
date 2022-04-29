@@ -8,6 +8,7 @@ require (
 	github.com/antchfx/xmlquery v1.3.3 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/gocolly/colly v1.2.0
+	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.2
 	github.com/kennygrant/sanitize v1.2.4 // indirect
 	github.com/pkg/errors v0.9.1

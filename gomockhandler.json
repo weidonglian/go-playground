@@ -1,0 +1,13 @@
+{
+	"mocks": {
+		"mocks/cache/mock_cache.go": {
+			"checksum": "4rK/YK5UOCfTRzmHkKxY9A==",
+			"source_checksum": "uj1+yYezgwe25GMTlN6UkQ==",
+			"mode": "SOURCE_MODE",
+			"source_mode_runner": {
+				"source": "algorithms/cache/cache.go",
+				"destination": "mocks/cache/mock_cache.go"
+			}
+		}
+	}
+}

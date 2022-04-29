@@ -4,7 +4,8 @@
 package tools
 
 import (
-	_ "github.com/vektra/mockery/v2"
-	_ "google.golang.org/protobuf/cmd/protoc-gen-go@latest"
-	_ "google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest"
+    _ "github.com/golang/mock/mockgen@latest"
+    _ "github.com/sanposhiho/gomockhandler@latest"
+    _ "google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest"
+    _ "google.golang.org/protobuf/cmd/protoc-gen-go@latest"
 )
