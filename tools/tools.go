@@ -4,8 +4,8 @@
 package tools
 
 import (
-    _ "github.com/golang/mock/mockgen@latest"
-    _ "github.com/sanposhiho/gomockhandler@latest"
-    _ "google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest"
-    _ "google.golang.org/protobuf/cmd/protoc-gen-go@latest"
+	_ "github.com/golang/mock/mockgen"
+	_ "github.com/sanposhiho/gomockhandler"
+	_ "google.golang.org/grpc/cmd/protoc-gen-go-grpc"
+	_ "google.golang.org/protobuf/cmd/protoc-gen-go"
 )
