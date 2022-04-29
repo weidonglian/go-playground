@@ -1,8 +1,10 @@
 package cache
 
 import (
-	mocks "github.com/weidonglian/go-playground/mocks/cache"
 	"testing"
+
+	"github.com/golang/mock/gomock"
+	"github.com/weidonglian/go-playground/mocks"
 )
 
 func play(cache Cache, t *testing.T) {
@@ -11,9 +13,9 @@ func play(cache Cache, t *testing.T) {
 }
 
 func TestCache(t *testing.T) {
-	mockedCache := new(mocks.Cache)
-	mockedCache.On("Get", "hello").Return("world", nil)
-	mockedCache.On("Set", "x", "y").Return(nil)
+	mockCtrl := gomock.NewController(t)
+	mockedCache := mocks.NewMockCache(mockCtrl)
+	mockedCache.EXPECT().Get("hello").Return("world", nil)
+	mockedCache.EXPECT().Set("x", "y").Return(nil)
 	play(mockedCache, t)
-	mockedCache.AssertExpectations(t)
 }
