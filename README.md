@@ -226,6 +226,16 @@ Another aspect of `context.Context` is to transfer `key-value` pair between API 
 be used to pass argument between API boundaries instead of passing normal optional arguments. In the `http`
 handler, `context.WithValue` is intensively used to pass information between different `http.HttpHandler` chains.
 
+## Multiple reader and multiple Writer to a single channel
+
+In principal, we can the following use-cases:
+- have multiple writer to a channel and a single reader to read from it, i.e. Fan in. 
+- If we have a single writer to a channel and multiple readers from the channel, i.e. Fan out.
+Note the above cases the message/data in the channel can only be read/write once by a single read/writer, i.e. only one of the multiple reader will be able to get a  message/data. 
+If we want to multiple readers receive the same message/data, it will be a broadcast/subscribe system, i.e. we need to one go-routine to read from different writers (fan-in) and then we can loop and send the same message/data to multiple readers/receivers. 
+
+A question is then how the `context.Done()` channel works? `context.Done()` will return a chan struct{} to notify the cancellation of the context. If there are multiple go-routines hookup to the same `context.Done()`, would it be that only one of them receive the cancellation? The answer is definite "NO", since when calling `cancel()` a context, it won't write a message/data into the `context.Done` channel, instead it will close it for simplity, i.e. close(context.Done()). This will tell all the hooked GoRoutines to unblock. 
+
 ## Buffer, Bytes, IoBuffer and FileHandling
 
 There are tons of APIs to handle a small file. The challenge is to handle the huge file in a CPU efficient and memory
